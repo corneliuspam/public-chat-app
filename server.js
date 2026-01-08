@@ -46,12 +46,12 @@ app.post("/login", async (req, res) => {
   const match = await bcrypt.compare(password, user.password);
   if (!match) return res.status(400).send("Wrong password");
 
-  res.send({ username: user.username });
+  res.send({ username: user.username, profile: user.profile });
 });
 
-// ===== Chat page =====
-app.get("/chat", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "chat.html"));
+// ===== Dashboard page =====
+app.get("/dashboard", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "dashboard.html"));
 });
 
 // ===== File uploads =====
@@ -80,4 +80,4 @@ io.on("connection", (socket) => {
 });
 
 const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => console.log("Server running on port", PORT));
+server.listen(PORT, () => console.log("PAM APP running on port", PORT));
