@@ -1,0 +1,12 @@
+body { font-family: Arial; margin:0; padding:0; background:#f0f2f5; }
+.header { background:#4267B2; color:white; padding:10px; text-align:center; font-size:20px; }
+.container { display:flex; justify-content:center; align-items:center; height:90vh; }
+.login-register { background:white; padding:20px; border-radius:10px; width:300px; }
+.login-register input { width:100%; margin:5px 0; padding:8px; }
+.login-register button { width:100%; margin:5px 0; padding:8px; background:#4267B2; color:white; border:none; cursor:pointer; }
+.sidebar { width:200px; background:white; float:left; padding:10px; height:90vh; position:fixed; }
+.main-chat { margin-left:210px; padding:10px; }
+#messages { height:400px; overflow-y:auto; border:1px solid #ccc; padding:5px; background:white; }
+#msg { width:70%; padding:8px; }
+#file { width:20%; }
+button { padding:8px; background:#4267B2; color:white; border:none; cursor:pointer; margin-top:5px; }
