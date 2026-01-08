@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Public Group Chat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="login">
+  <h2>Join Chat</h2>
+  <input id="username" placeholder="Your name" />
+  <button onclick="joinChat()">Join</button>
+</div>
+
+<div id="chat" style="display:none">
+  <div id="messages"></div>
+  <input id="msg" placeholder="Type message" />
+  <button onclick="sendMsg()">Send</button>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
