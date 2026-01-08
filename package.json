@@ -10,5 +10,8 @@
     "socket.io": "^4.7.2",
     "express-fileupload": "^1.6.3",
     "bcrypt": "^5.1.0"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }
