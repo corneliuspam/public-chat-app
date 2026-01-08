@@ -3,17 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Facebook Chat</title>
+<title>PAM APP Dashboard</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="header">Facebook-Style Chat</div>
+<div class="header">PAM APP</div>
 <div class="sidebar">
   <h3>Profile</h3>
   <div id="profile-pic">👤</div>
-  <div id="username">User</div>
+  <div id="username">Username</div>
+  <ul class="menu">
+    <li>Home</li>
+    <li>Messages</li>
+    <li>Settings</li>
+    <li>Logout</li>
+  </ul>
 </div>
-<div class="main-chat">
+<div class="main-content">
   <div id="messages"></div>
   <input type="text" id="msg" placeholder="Type message">
   <input type="file" id="file">
@@ -22,6 +28,6 @@
 </div>
 
 <script src="/socket.io/socket.io.js"></script>
-<script src="chat.js"></script>
+<script src="dashboard.js"></script>
 </body>
 </html>
