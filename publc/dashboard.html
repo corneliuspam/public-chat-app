@@ -1,33 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PAM APP Dashboard</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>PAM APP – Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
 </head>
-<body>
-<div class="header">PAM APP</div>
-<div class="sidebar">
-  <h3>Profile</h3>
-  <div id="profile-pic">👤</div>
-  <div id="username">Username</div>
-  <ul class="menu">
-    <li>Home</li>
-    <li>Messages</li>
-    <li>Settings</li>
-    <li>Logout</li>
-  </ul>
-</div>
-<div class="main-content">
-  <div id="messages"></div>
-  <input type="text" id="msg" placeholder="Type message">
-  <input type="file" id="file">
-  <button onclick="sendMsg()">Send</button>
-  <button onclick="sendImage()">Upload Image</button>
-</div>
+<body class="dashboard-body">
 
-<script src="/socket.io/socket.io.js"></script>
-<script src="dashboard.js"></script>
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <h2>PAM APP</h2>
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <!-- Chat Area -->
+  <div class="chat-container" id="chat-box">
+    <div class="message other">Welcome to PAM APP 👋</div>
+  </div>
+
+  <!-- Message Input -->
+  <div class="chat-input">
+    <input type="text" id="message" placeholder="Type a message..." />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
+  <script>
+    function sendMessage() {
+      const input = document.getElementById("message");
+      if (!input.value.trim()) return;
+
+      const msg = document.createElement("div");
+      msg.className = "message me";
+      msg.textContent = input.value;
+
+      document.getElementById("chat-box").appendChild(msg);
+      input.value = "";
+      msg.scrollIntoView();
+    }
+
+    function logout() {
+      window.location.href = "/";
+    }
+  </script>
+
 </body>
 </html>
