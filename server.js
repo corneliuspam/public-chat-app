@@ -1,3 +1,4 @@
+// server.js
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
@@ -6,6 +7,7 @@ const fileUpload = require("express-fileupload");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Path to users.json
 const USERS_FILE = path.join(__dirname, "data", "users.json");
 
 // Middleware
@@ -14,35 +16,38 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(fileUpload());
 
-// Routes
+// ===== ROUTES =====
+
+// Root → login page
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-// Serve dashboard
+// Dashboard route
 app.get("/dashboard", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "dashboard.html"));
-});
-
-// Fallback for unknown routes
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 // Login route
 app.post("/login", (req, res) => {
   const { username, password } = req.body;
+
   if (!username || !password) return res.status(400).json({ error: "Missing login fields" });
 
   if (!fs.existsSync(USERS_FILE)) return res.status(500).json({ error: "Server error: users file missing" });
 
   const users = JSON.parse(fs.readFileSync(USERS_FILE, "utf8"));
   const user = users.find(u => u.username === username);
-  if (!user) return res.status(400).json({ error: "User not found" });
 
+  if (!user) return res.status(400).json({ error: "User not found" });
   if (password !== user.password) return res.status(400).json({ error: "Wrong password" });
 
   res.json({ success: true, username: user.username });
+});
+
+// Catch-all → redirect to login page for unknown routes
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 // Start server
