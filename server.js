@@ -2,13 +2,12 @@
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
-const bcrypt = require("bcrypt");
 const fileUpload = require("express-fileupload");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Path to users file (pre-created users)
+// Path to users file
 const USERS_FILE = path.join(__dirname, "data", "users.json");
 
 // ===== MIDDLEWARE =====
@@ -30,7 +29,7 @@ app.get("/dashboard", (req, res) => {
 });
 
 // ===== LOGIN ROUTE =====
-app.post("/login", async (req, res) => {
+app.post("/login", (req, res) => {
   try {
     const { username, password } = req.body;
 
@@ -47,15 +46,14 @@ app.post("/login", async (req, res) => {
       return res.status(500).json({ error: "Server error: users file missing" });
     }
 
-    // Find user
+    // Find user by username
     const user = users.find(u => u.username === username);
     if (!user) {
       return res.status(400).json({ error: "User not found" });
     }
 
-    // Compare password
-    const match = await bcrypt.compare(password, user.password);
-    if (!match) {
+    // Compare plain text password
+    if (password !== user.password) {
       return res.status(400).json({ error: "Wrong password" });
     }
 
