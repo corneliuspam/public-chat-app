@@ -5,161 +5,48 @@
   <title>PAM APP – Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f0f2f5;
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-    }
-
-    /* Top bar */
-    .top-bar {
-      background: #1877f2;
-      color: white;
-      padding: 15px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 18px;
-      font-weight: bold;
-    }
-
-    .top-bar button {
-      background: #145db2;
-      border: none;
-      color: white;
-      padding: 8px 12px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .top-bar button:hover {
-      background: #0f3f80;
-    }
-
-    /* Chat container */
-    .chat-container {
-      flex: 1;
-      padding: 15px;
-      overflow-y: auto;
-      background: #e5ddd5;
-    }
-
-    .message {
-      max-width: 70%;
-      padding: 10px 15px;
-      margin: 8px 0;
-      border-radius: 15px;
-      clear: both;
-      word-wrap: break-word;
-    }
-
-    .message.me {
-      background: #1877f2;
-      color: white;
-      float: right;
-    }
-
-    .message.other {
-      background: #fff;
-      float: left;
-    }
-
-    /* Message input */
-    .chat-input {
-      display: flex;
-      padding: 10px;
-      background: #f0f2f5;
-      border-top: 1px solid #ccc;
-    }
-
-    .chat-input input {
-      flex: 1;
-      padding: 10px;
-      border-radius: 20px;
-      border: 1px solid #ccc;
-      margin-right: 10px;
-    }
-
-    .chat-input button {
-      padding: 10px 15px;
-      background: #1877f2;
-      color: white;
-      border: none;
-      border-radius: 20px;
-      cursor: pointer;
-    }
-
-    .chat-input button:hover {
-      background: #145db2;
-    }
-
-    /* Scrollbar style */
-    .chat-container::-webkit-scrollbar {
-      width: 6px;
-    }
-    .chat-container::-webkit-scrollbar-thumb {
-      background-color: rgba(0,0,0,0.2);
-      border-radius: 3px;
-    }
-  </style>
 </head>
 <body>
-
-  <!-- Top bar -->
   <div class="top-bar">
     <span id="username-display">PAM APP</span>
     <button onclick="logout()">Logout</button>
   </div>
 
-  <!-- Chat container -->
   <div class="chat-container" id="chat-box">
     <div class="message other">Welcome to PAM APP 👋</div>
   </div>
 
-  <!-- Message input -->
   <div class="chat-input">
     <input type="text" id="message" placeholder="Type a message..." />
     <button onclick="sendMessage()">Send</button>
   </div>
 
-  <!-- Scripts -->
   <script>
-    // Show logged-in username
-    function showUsername() {
-      const username = sessionStorage.getItem("username");
-      const display = document.getElementById("username-display");
-      if (username) display.textContent = `PAM APP – ${username}`;
+    // ===== LOGIN CHECK =====
+    const username = sessionStorage.getItem("username");
+    if (!username) {
+      window.location.href = "index.html"; // redirect to login if not logged in
+    } else {
+      document.getElementById("username-display").textContent = `PAM APP – ${username}`;
     }
 
-    showUsername();
-
-    // Send message
+    // ===== CHAT FUNCTIONS =====
     function sendMessage() {
       const input = document.getElementById("message");
       if (!input.value.trim()) return;
-
       const msg = document.createElement("div");
       msg.className = "message me";
       msg.textContent = input.value;
-
       const chatBox = document.getElementById("chat-box");
       chatBox.appendChild(msg);
       chatBox.scrollTop = chatBox.scrollHeight;
-
-      // Clear input
       input.value = "";
     }
 
-    // Logout
     function logout() {
       sessionStorage.removeItem("username");
-      window.location.href = "/";
+      window.location.href = "index.html";
     }
   </script>
-
 </body>
 </html>
