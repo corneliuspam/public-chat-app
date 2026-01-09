@@ -41,12 +41,20 @@ app.post("/login", async (req, res) => {
   const { username, password } = req.body;
   const users = JSON.parse(fs.readFileSync(USERS_FILE, "utf8") || "[]");
   const user = users.find(u => u.username === username);
-  if (!user) return res.status(400).send("User not found");
+
+  if (!user) {
+    return res.status(400).json({ error: "User not found" });
+  }
 
   const match = await bcrypt.compare(password, user.password);
-  if (!match) return res.status(400).send("Wrong password");
+  if (!match) {
+    return res.status(400).json({ error: "Wrong password" });
+  }
 
-  res.send({ username: user.username, profile: user.profile });
+  res.json({
+    username: user.username,
+    profile: user.profile
+  });
 });
 
 // ===== Dashboard page =====
