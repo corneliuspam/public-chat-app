@@ -1,17 +1,3 @@
-function register() {
-  const username = document.getElementById("reg-username").value;
-  const email = document.getElementById("reg-email").value;
-  const phone = document.getElementById("reg-phone").value;
-  const password = document.getElementById("reg-password").value;
-
-  fetch("/register", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, email, phone, password })
-  }).then(res => res.text())
-    .then(res => alert(res));
-}
-
 function login() {
   const username = document.getElementById("login-username").value;
   const password = document.getElementById("login-password").value;
@@ -20,9 +6,23 @@ function login() {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username, password })
-  }).then(res => res.json())
-    .then(res => {
-      if (res.username) window.location.href = "/dashboard";
-      else alert("Login failed");
-    });
+  })
+  .then(async res => {
+    const text = await res.text();
+
+    try {
+      const data = JSON.parse(text);
+      if (data.username) {
+        window.location.href = "/dashboard";
+      } else {
+        alert(text);
+      }
+    } catch {
+      alert(text);
+    }
+  })
+  .catch(err => {
+    alert("Login error");
+    console.error(err);
+  });
 }
