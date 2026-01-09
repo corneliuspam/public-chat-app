@@ -23,17 +23,30 @@ app.use(fileUpload());
 // ===== Registration =====
 app.post("/register", async (req, res) => {
   const { username, email, phone, password } = req.body;
-  if (!username || !email || !password) return res.status(400).send("Missing fields");
+
+  if (!username || !email || !password) {
+    return res.status(400).json({ error: "Missing fields" });
+  }
 
   let users = JSON.parse(fs.readFileSync(USERS_FILE, "utf8") || "[]");
-  if (users.find(u => u.username === username || u.email === email))
-    return res.status(400).send("User exists");
+
+  if (users.find(u => u.username === username || u.email === email)) {
+    return res.status(400).json({ error: "User already exists" });
+  }
 
   const hash = await bcrypt.hash(password, 10);
-  users.push({ username, email, phone, password: hash, profile: "" });
+
+  users.push({
+    username,
+    email,
+    phone,
+    password: hash,
+    profile: ""
+  });
+
   fs.writeFileSync(USERS_FILE, JSON.stringify(users, null, 2));
 
-  res.send("ok");
+  res.json({ success: true });
 });
 
 // ===== Login =====
