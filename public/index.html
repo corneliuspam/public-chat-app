@@ -1,28 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Facebook-Style Chat - Login/Register</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>PAM APP – Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
 </head>
-<body>
-<div class="container">
-  <div class="login-register">
-    <h2>Register</h2>
-    <input type="text" id="reg-username" placeholder="Username">
-    <input type="email" id="reg-email" placeholder="Email">
-    <input type="text" id="reg-phone" placeholder="Phone">
-    <input type="password" id="reg-password" placeholder="Password">
-    <button onclick="register()">Register</button>
+<body class="auth-body">
 
-    <h2>Login</h2>
-    <input type="text" id="login-username" placeholder="Username">
-    <input type="password" id="login-password" placeholder="Password">
+  <div class="auth-container">
+    <h1 class="logo">PAM APP</h1>
+    <p class="subtitle">Public Chat Platform</p>
+
+    <input type="text" id="login-username" placeholder="Username" />
+    <input type="password" id="login-password" placeholder="Password" />
+
     <button onclick="login()">Login</button>
   </div>
-</div>
 
-<script src="login.js"></script>
+  <script src="login.js"></script>
 </body>
 </html>
