@@ -1,12 +1,103 @@
-body { font-family: Arial; margin:0; padding:0; background:#f0f2f5; }
-.header { background:#0d6efd; color:white; padding:10px; font-size:22px; text-align:center; }
-.sidebar { width:200px; background:white; float:left; padding:10px; height:100vh; position:fixed; }
-.sidebar #profile-pic { font-size:40px; text-align:center; margin:10px 0; }
-.sidebar .menu { list-style:none; padding:0; }
-.sidebar .menu li { padding:8px 0; cursor:pointer; }
-.main-content { margin-left:210px; padding:10px; }
-#messages { height:400px; overflow-y:auto; border:1px solid #ccc; padding:5px; background:white; margin-bottom:10px; }
-#msg { width:65%; padding:8px; }
-#file { width:20%; }
-button { padding:8px; margin-left:5px; background:#0d6efd; color:white; border:none; cursor:pointer; }
-.chat-img { max-width:150px; border-radius:5px; margin-top:5px; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f0f2f5;
+}
+
+/* LOGIN */
+.auth-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.auth-container {
+  background: white;
+  padding: 30px;
+  width: 300px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.logo {
+  color: #1877f2;
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #666;
+}
+
+.auth-container input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+}
+
+.auth-container button {
+  width: 100%;
+  padding: 10px;
+  background: #1877f2;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* DASHBOARD */
+.dashboard-body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.top-bar {
+  background: #1877f2;
+  color: white;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.chat-container {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.message {
+  max-width: 70%;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 10px;
+}
+
+.message.me {
+  background: #1877f2;
+  color: white;
+  margin-left: auto;
+}
+
+.message.other {
+  background: #e4e6eb;
+}
+
+.chat-input {
+  display: flex;
+  padding: 10px;
+  background: white;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+}
+
+.chat-input button {
+  padding: 10px;
+  background: #1877f2;
+  color: white;
+  border: none;
+}
