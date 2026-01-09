@@ -22,7 +22,7 @@ function login() {
     body: JSON.stringify({ username, password })
   }).then(res => res.json())
     .then(res => {
-      if (res.username) window.location.href = "/chat";
+      if (res.username) window.location.href = "/dashboard";
       else alert("Login failed");
     });
 }
