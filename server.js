@@ -52,6 +52,11 @@ app.post("/register", async (req, res) => {
 // ===== Login =====
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
+
+  if (!username || !password) {
+    return res.status(400).json({ error: "Missing login fields" });
+  }
+
   const users = JSON.parse(fs.readFileSync(USERS_FILE, "utf8") || "[]");
   const user = users.find(u => u.username === username);
 
@@ -65,8 +70,8 @@ app.post("/login", async (req, res) => {
   }
 
   res.json({
-    username: user.username,
-    profile: user.profile
+    success: true,
+    username: user.username
   });
 });
 
