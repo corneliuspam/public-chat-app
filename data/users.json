@@ -1,1 +1,23 @@
-[]
+[
+  {
+    "username": "admin",
+    "email": "admin@pam.app",
+    "phone": "08000000001",
+    "password": "$2b$10$Hq2c0xFzZb9Hf5y2/Mq1eO0A1oZk7l2yZ/1sAqF7V3Bb8g9tM1eZe", 
+    "profile": ""
+  },
+  {
+    "username": "pam",
+    "email": "pam@test.com",
+    "phone": "08000000002",
+    "password": "$2b$10$Yk3F9V0zS1qGv5h3Pj4eO0F2kZl8p3yX/2sBvH8W3Aa9f8gS4fEeG", 
+    "profile": ""
+  },
+  {
+    "username": "user1",
+    "email": "user1@pam.app",
+    "phone": "08000000003",
+    "password": "$2b$10$Kp8T9V1yD2rGv3k1Pj5fQ0J3lZk7m2yX/1sCvF8V2Bb9h7tN2dEeF", 
+    "profile": ""
+  }
+]
