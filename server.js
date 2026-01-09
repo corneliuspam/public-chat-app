@@ -8,6 +8,7 @@ const PORT = process.env.PORT || 3000;
 
 const USERS_FILE = path.join(__dirname, "data", "users.json");
 
+// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
@@ -18,17 +19,17 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-// Fallback: serve dashboard static file
+// Serve dashboard
 app.get("/dashboard", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "dashboard.html"));
 });
 
-// Fallback for unknown routes → index.html
+// Fallback for unknown routes
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-// Login
+// Login route
 app.post("/login", (req, res) => {
   const { username, password } = req.body;
   if (!username || !password) return res.status(400).json({ error: "Missing login fields" });
