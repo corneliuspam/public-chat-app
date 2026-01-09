@@ -1,3 +1,4 @@
+// public/login.js
 function login() {
   const username = document.getElementById("login-username").value.trim();
   const password = document.getElementById("login-password").value.trim();
@@ -15,8 +16,10 @@ function login() {
   .then(res => res.json())
   .then(data => {
     if (data.success) {
+      // Store username in sessionStorage
       sessionStorage.setItem("username", data.username);
-      window.location.href = "dashboard.html"; // redirect to dashboard
+      // Redirect to dashboard route
+      window.location.href = "/dashboard";
     } else {
       alert(data.error || "Login failed");
     }
