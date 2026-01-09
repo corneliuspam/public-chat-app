@@ -1,30 +1,23 @@
-function register() {
-  const username = document.getElementById("reg-username").value;
-  const email = document.getElementById("reg-email").value;
-  const phone = document.getElementById("reg-phone").value;
-  const password = document.getElementById("reg-password").value;
+function login() {
+  const username = document.getElementById("login-username").value;
+  const password = document.getElementById("login-password").value;
 
-  fetch("/register", {
+  fetch("/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, email, phone, password })
+    body: JSON.stringify({ username, password })
   })
   .then(async res => {
-    const text = await res.text();
+    const data = await res.json();
 
-    try {
-      const data = JSON.parse(text);
-      if (data.success) {
-        alert("Registration successful. Please login.");
-      } else {
-        alert(data.error || "Registration failed");
-      }
-    } catch {
-      alert(text);
+    if (data.success) {
+      window.location.href = "/dashboard";
+    } else {
+      alert(data.error || "Login failed");
     }
   })
   .catch(err => {
-    alert("Registration error");
+    alert("Login error");
     console.error(err);
   });
 }
