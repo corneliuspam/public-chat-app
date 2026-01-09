@@ -1,4 +1,5 @@
 // login.js
+window.location.href = "dashboard.html";
 
 // LOGIN FUNCTION
 function login() {
