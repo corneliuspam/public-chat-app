@@ -28,6 +28,11 @@ app.get("/dashboard", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "dashboard.html"));
 });
 
+// Fallback: redirect all unknown GET routes to index.html
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
 // ===== LOGIN ROUTE =====
 app.post("/login", (req, res) => {
   try {
