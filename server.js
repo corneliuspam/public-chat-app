@@ -8,10 +8,9 @@ const PORT = process.env.PORT || 3000;
 
 const USERS_FILE = path.join(__dirname, "data", "users.json");
 
-// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "public"))); // Serve static files
+app.use(express.static(path.join(__dirname, "public")));
 app.use(fileUpload());
 
 // Routes
@@ -19,12 +18,12 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-// Dashboard route
+// Fallback: serve dashboard static file
 app.get("/dashboard", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "dashboard.html"));
 });
 
-// Fallback for unknown routes
+// Fallback for unknown routes → index.html
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
@@ -32,14 +31,11 @@ app.get("*", (req, res) => {
 // Login
 app.post("/login", (req, res) => {
   const { username, password } = req.body;
-
   if (!username || !password) return res.status(400).json({ error: "Missing login fields" });
 
-  let users = [];
-  if (fs.existsSync(USERS_FILE)) {
-    users = JSON.parse(fs.readFileSync(USERS_FILE, "utf8"));
-  } else return res.status(500).json({ error: "Server error: users file missing" });
+  if (!fs.existsSync(USERS_FILE)) return res.status(500).json({ error: "Server error: users file missing" });
 
+  const users = JSON.parse(fs.readFileSync(USERS_FILE, "utf8"));
   const user = users.find(u => u.username === username);
   if (!user) return res.status(400).json({ error: "User not found" });
 
